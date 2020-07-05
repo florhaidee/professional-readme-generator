@@ -1,21 +1,21 @@
 const inquirer = require('inquirer');
-/* ---- Profile questions --------*/
+const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
+/* ---- User questions --------*/
 const promptUser = () => {
-return inquirer.prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: 'What is your name? (Required)',
-      validate: nameInput => {
-        if (nameInput) {
-          return true;
-        } else {
-          console.log('Please enter your name!');
-          return false;
+    return inquirer.prompt([{
+        type: 'input',
+        name: 'title',
+        message: 'What is the Title of your application? (Required)',
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Please enter the Title of your application!');
+                return false;
+            }
         }
-      }
-    },
-]);
+    }]);
 };
 // array of questions for user
 const questions = [
@@ -24,6 +24,11 @@ const questions = [
 
 // function to write README file
 function writeToFile(fileName, data) {
+    fs.writeFile(fileName, generateMarkdown(data), err => {
+        if (err) throw err;
+
+        console.log('File complete! Check out readme.md to see the output!');
+    });
 }
 
 // function to initialize program
@@ -31,9 +36,10 @@ function init() {
     promptUser()
         .then(data => {
             console.log(data);
+            writeToFile('./dist/readme.md', data)
         })
         .catch(err => {
-        console.log(err);
+            console.log(err);
         });
 };
 

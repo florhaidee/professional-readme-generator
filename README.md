@@ -1,7 +1,3 @@
-# Professional README Generator Starter Code
-
-[How to create a Professional README](./readme-guide.md)
-
 # Professional README Generator             ![badge](https://img.shields.io/badge/license-MIT-blue) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
   ## Description
     A command-line application that dynamically generates a professional README.md file from a user's input using the Inquirer package from Node.js. 

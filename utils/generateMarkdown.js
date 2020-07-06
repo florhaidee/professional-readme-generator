@@ -79,7 +79,7 @@ function generateMarkdown(data) {
 
   ## License
     Copyright © ${new Date().getFullYear()} ${data.github}. 
-    Licensed under the ${license} to see more about this license you can find it on the file 'license.txt' go to (./dist/license.txt) 
+    Licensed under the ${license} to see more about this license go to [license.txt](license.txt) 
 
   ## Contributing
     ${data.contributing}
@@ -87,7 +87,7 @@ function generateMarkdown(data) {
 ${generateTests(data.tests)}
 
   ## Questions
-    If you have more questions about this application, you can cantact me by:
+    If you have more questions about this application, you can contact me by:
       email: ${data.email}
       GitHub username: ${data.github}
 

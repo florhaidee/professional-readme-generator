@@ -1,4 +1,11 @@
 const fs = require('fs');
+const copyFile = data => {
+  fs.copyFile(data, './dist/license.txt', err => {
+    // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+    if (err) throw err;
+    console.log('license was copied to destination');
+  });
+}
 // create a tests section
 const generateTests = data => {
   if (!data) {
@@ -14,77 +21,45 @@ const generateTests = data => {
 const generateLicense = data => {
   console.log(data)
   if (data === 'GNU AGPLv3') {
-    fs.copyFile('./src/AGPLv3.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
+    copyFile('./src/AGPLv3.txt')
+    return 'AGPLv3'
   }
   if (data === 'GNU GPLv3') {
-    fs.copyFile('./src/GPLv3.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
+    copyFile('./src/GPLv3.txt')
+    return 'GPLv3'
   }
   if (data === 'GNU LGPLv3') {
-    fs.copyFile('./src/LGPLv3.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
+    copyFile('./src/LGPLv3.txt')
+    return 'LGPLv3'
   }
   if (data === 'Mozilla Public License 2.0') {
-    fs.copyFile('./src/Mozilla-license.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
+    copyFile('./src/Mozilla-license.txt')
+    return 'Mozilla_Public_License_2.0'
   }
   if (data === 'Apache License 2.0') {
-    fs.copyFile('./src/apache-2.0.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
-  }
-  if (data === 'Apache License 2.0') {
-    fs.copyFile('./src/apache-2.0.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-      
-    });
+    copyFile('./src/apache-2.0.txt')
+    return 'Apache_License_2.0'
   }
   if (data === 'ISC') {
-    fs.copyFile('./src/ISC.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
+    copyFile('./src/ISC.txt')
+    return 'ISC'
   }
   if (data === 'MIT') {
-    fs.copyFile('./src/MIT-license.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
+    copyFile('./src/MIT-license.txt')
+    return 'ISC'
   }
   if (data === 'Unlicense') {
-    fs.copyFile('./src/unlicense.txt', './dist/license.txt', err => {
-      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
-      if (err) throw err;
-      console.log('license was copied to destination');
-    });
+    copyFile('./src/unlicense.txt')
+    return 'Unlicense'
   }
 };
 // function to generate markdown for README
 function generateMarkdown(data) {
   console.log(data)
   const license = data.license.toString();
-  generateLicense(license);
+  const aux = generateLicense(license);
 
-  return `# ${data.title}             ![badmath](https://img.shields.io/static/v1?label=License&message=${license}&color=blue)
+  return `# ${data.title}             ![badge](https://img.shields.io/badge/license-${aux}-blue)
   ## Description
     ${data.description}
 
@@ -96,7 +71,7 @@ function generateMarkdown(data) {
   * [Tests](#tests)
   * [Questions](#questions)
   
-  ## Instalation
+  ## Installation
     ${data.installation}
 
   ## Usage
@@ -104,7 +79,7 @@ function generateMarkdown(data) {
 
   ## License
     Copyright © ${new Date().getFullYear()} ${data.github}. 
-    Licensed under the [${license} license](./dist/license.txt). 
+    Licensed under the ${license} to see more about this license you can find it on the file 'license.txt' go to (./dist/license.txt) 
 
   ## Contributing
     ${data.contributing}
